@@ -65,11 +65,24 @@ delete_user = Endpoint(
     placeholders = ['user']
 )
 
+"""
+@api {get} /site/:site_id/terms Add terms to a proyect
+@apiName AddTermsToProyect
+@apiDescription Add some terms to a existing proyect
+@apiGroup Proyects
+@apiParam {String} site_id Unique ID that identifies the proyect
+@apiHeader {String} Authorization This should be "Bearer JWT", where JWT is a js web token. 
+@apiHeaderExample {json} Header-Example:
+    {
+        "Authorization": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ"
+    }
+"""
 add_terms_to_proyect = Endpoint(
     method = 'POST',
     path = '/site/$1/terms',
     placeholders = ['site']
 )
+
 
 add_profile_to_proyect = Endpoint(
     method = 'POST',
@@ -77,30 +90,74 @@ add_profile_to_proyect = Endpoint(
     placeholders = ['site']
 )
 
+
+"""
+@api {get} /site/:site_id Get Proyect info
+@apiName GetProyectInfo
+@apiDescription Retrieve avaliable proyect information
+@apiGroup Proyects
+@apiParam {String} site_id Unique ID that identifies the proyect
+@apiHeader {String} Authorization This should be "Bearer JWT", where JWT is a js web token. 
+"""
 get_proyect_info = Endpoint(
     method = 'GET',
     path = '/site/$1',
     placeholders = ['site']
 )
 
+
+"""
+@api {get} /profile/:profile_id Get Profile info
+@apiName GetProfileInfo
+@apiDescription Get information of a monitorized profile
+@apiGroup Profiles
+@apiParam {String} profile_id Unique ID that identifies the profile
+@apiHeader {String} Authorization This should be "Bearer JWT", where JWT is a js web token. 
+"""
 get_profile_info = Endpoint(
     method = 'GET',
     path = '/profile/$1',
     placeholders = ['profile']
 )
 
+"""
+@api {get} /site/:profile_id/posts Get profile posts
+@apiName GetProfilePosts
+@apiDescription Get posts published by a monitorized profile
+@apiGroup Profiles
+@apiParam {String} profile_id Unique ID that identifies the profile
+@apiHeader {String} Authorization This should be "Bearer JWT", where JWT is a js web token. 
+"""
 get_profile_posts = Endpoint(
     method = 'POST',
     path = '/profile/$1/posts',
     placeholders = ['profile']
 )
 
+"""
+@api {get} /profile/:profile_id/site/:site_id/posts Get profile posts on proyect
+@apiName GetProfilePostsOnProyect
+@apiDescription Get post published by a monitorized profile in a proyect
+@apiGroup Profiles
+@apiParam {String} profile_id Unique ID that identifies the profile
+@apiParam {String} site_id Unique ID that identifies the proyect
+@apiHeader {String} Authorization This should be "Bearer JWT", where JWT is a js web token. 
+"""
 get_profile_posts_on_proyect = Endpoint(
     method = 'POST',
     path = '/profile/$1/site/$2/posts',
     placeholders = ['profile', 'site']
 )
 
+
+"""
+@api {get} /site/:site_id/getprofiles Get profiles
+@apiName GetProfiles
+@apiDescription Get profiles list added to a proyect
+@apiGroup Profiles
+@apiParam {Number} site_id Unique ID that identifies the proyect
+@apiHeader {String} Authorization This should be "Bearer JWT", where JWT is a js web token. 
+"""
 get_profiles = Endpoint(
     method = 'POST',
     path = '/site/$1/getprofiles',
