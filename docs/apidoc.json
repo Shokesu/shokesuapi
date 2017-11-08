@@ -1,0 +1,7 @@
+{
+  "name": "Shokesu HTTP API",
+  "version": "1.0.0",
+  "description": "This is the documentation of HTTPS request to Shokesu API",
+  "title": "Shokesu HTTP API Documentation",
+  "url" : "https://app.shokesu.com:8443/shokesu"
+}
