@@ -92,7 +92,7 @@ add_profile_to_proyect = Endpoint(
 
 
 """
-@api {get} /site/:site_id Get Proyect info
+@api {get} /site/:site_id Get proyect info
 @apiName GetProyectInfo
 @apiDescription Retrieve avaliable proyect information
 @apiGroup Proyects
