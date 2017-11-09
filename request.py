@@ -6,6 +6,7 @@ Este módulo se encarga de gestionar las requests a la API de Shokesu
 
 import requests, json
 from re import match, search, DOTALL
+from logger import Logger
 
 # URI raíz de la API de Shokesu
 # api_uri_root = 'https://api.shokesu.com'
@@ -37,6 +38,8 @@ def request(method, path, access_token = None, payload = None):
         'DELETE' : requests.delete
     }
 
+    logger = Logger()
+
     if payload is None and method == 'POST':
         payload = {}
     payload = json.dumps(payload) if not payload is None else None
@@ -44,8 +47,13 @@ def request(method, path, access_token = None, payload = None):
     if not access_token is None:
         headers['Authorization'] = 'Bearer {}'.format(access_token)
 
-    print('Sending request to {}'.format(url))
+    logger.debug('-------------\n')
+    logger.debug('Sending {} request to {}'.format(method, url))
+    logger.debug('Headers: ')
+    logger.debug('\n'.join(['{}: {}'.format(key, value) for key, value in headers.items()]))
+
     response = send_request[method](url = url, data = payload, headers = headers)
+    logger.debug('Response status code: {}'.format(response.status_code))
 
     try:
         if response.status_code == 404:
@@ -61,6 +69,9 @@ def request(method, path, access_token = None, payload = None):
     except Exception as e:
         raise Exception('Error executing request to {}: {}'.format(response.url, str(e)))
     try:
+        logger.debug('Response body: ')
+        logger.debug(response.text)
+        logger.debug('-------------\n')
         return response.json()
     except:
         raise Exception('Error parsing request response from {} to JSON'.format(response.url))
