@@ -6,6 +6,7 @@ Script principal. Permite interactúar con la API de Shokesu.
 import endpoints
 from resourcemapper import ResourceMapper
 from request import request
+from entities.post import Post
 
 class API:
     '''
@@ -104,9 +105,11 @@ class API:
             endpoint = endpoints.get_profile_posts
             placeholders = {'profile' : profile}
 
-        self.request(endpoint = endpoint,
-                     placeholders = placeholders,
-                     use_access_token = True)
+        data = self.request(endpoint = endpoint,
+                            placeholders = placeholders,
+                            use_access_token = True)
+        return Post.get_from_data(data)
+
 
 
     def get_profiles(self, site, params):
@@ -142,6 +145,7 @@ class API:
     def get_insights(self):
         # TODO
         raise Exception('Uninplemented method')
+
 
     def request(self, endpoint, placeholders = {}, use_access_token = True, params = None):
         method = endpoint.method
