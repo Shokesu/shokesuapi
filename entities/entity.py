@@ -9,6 +9,7 @@ datos a partir de las respuestas a las requests HTTP realizadas.
 
 from datetime import datetime
 from re import match
+import json
 
 class Field:
     '''
@@ -152,3 +153,17 @@ class Entity:
             return entity
         except:
             return None
+
+
+    def to_dict(self):
+        '''
+        :return: Devuelve un diccionario con los valores de los campos de esta entidad.
+        '''
+        return self.__dict__
+
+    def to_json(self):
+        '''
+        Codifica los campos de esta entidad en formato JSON.
+        :return:
+        '''
+        return json.dumps(self.to_dict())
