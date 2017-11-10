@@ -88,9 +88,10 @@ class API:
         Obtiene información de un perfil.
         :return:
         '''
-        self.request(endpoints.get_profile_info,
-                     placeholders = {'profile' : profile},
-                     use_access_token = True)
+        data = self.request(endpoints.get_profile_info,
+                            placeholders = {'profile' : profile},
+                            use_access_token = True)
+        return data
 
 
     def get_profile_posts(self, profile, site = None, page_number = 1, page_size = 10, sort = None):
