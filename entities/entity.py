@@ -147,23 +147,21 @@ class Entity:
         una lista con las entidades obtenidas. (Si no se pudo extraer una entidad a partir de una entrada de esta
         lista, no se generará una excepción)
         En caso contrario, debe ser un diccionario con los datos de una sola entidad. Se devolverá la entidad
-        extraída (se devolverá None en caso de error al extraer la entidad  a partir de los datos)
+        extraída (en caso de error se generará una excepción)
         '''
 
         if isinstance(data, list):
             entities = []
             for entry in data:
-                entity = cls.get_from_data(entry)
-                if not entity is None:
+                try:
+                    entity = cls.get_from_data(entry)
                     entities.append(entity)
+                except:
+                    pass
             return entities
 
-        try:
-            entity = cls(data)
-            return entity
-        except:
-            return None
-
+        entity = cls(data)
+        return entity
 
     def to_dict(self):
         '''
