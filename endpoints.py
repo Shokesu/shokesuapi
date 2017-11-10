@@ -158,12 +158,74 @@ get_proyect_info = Endpoint(
 
 
 """
-@api {get} /profile/:profile_id Get Profile info
+@api {get} /profile/<profile_id> Get Profile info
 @apiName GetProfileInfo
 @apiDescription Get information of a monitorized profile
 @apiGroup Profiles
 @apiParam {String} profile_id Unique ID that identifies the profile
 @apiHeader {String} Authorization This should be "Bearer JWT", where JWT is a js web token. 
+
+@apiSuccess {Integer} utc_offset
+@apiSuccess {String} mongoid The ID of the profile in the Shokesu mongoDB's database.
+@apiSuccess {Integer} friends_count Number of friends of the profile (<b>in the associated external
+social network</b>)
+@apiSuccess {Object} searches
+@apiSuccess {Integer} listed_count
+@apiSuccess {Integer} favorites_count
+@apiSuccess {Boolean} verified
+@apiSuccess {String} description Description of the profile (<b>in the associated external social network</b>)
+@apiSuccess {String} photo Url of the profile's photo
+@apiSuccess {Date} created_at Profile's creation date <b>Format???</b>
+@apiSuccess {Object} sites
+@apiSuccess {String} url Url of the profile in the associated external social network
+@apiSuccess {String} cloud
+@apiSuccess {String} channel_provider_id
+@apiSuccess {String} provider Name of the social network that this profile belongs to
+@apiSuccess {Integer} posts_avg
+@apiSuccess {Integer} followers_count Number of followers of this profile
+@apiSuccess {String} name Name of the profile 
+(<b>field that could be founded in the profile's account information in the associated external social network</b>)
+@apiSuccess {String} location Location of the profile
+(<b>field that could be founded in the profile's account information in the associated external social network</b>)
+@apiSuccess {Integer} klout_score
+@apiSuccess {Boolean} geo_enabled
+@apiSuccess {String} screenname Screen name of the profile
+@apiSuccess {String} lang Language of the profile
+@apiSuccess {Integer} posts_count Number of posts that had been sent by this profile
+(since the profile started to be monitorized by Shokesu?)
+
+@apiSuccessExample {json} Success-Response
+HTTP/1.1 200 OK
+    {
+        "utc_offset": 3600,
+        "mongoid": "57a9c989d6a340ee508b45e1",
+        "friends_count": 4446,
+        "searches" : [
+            ...
+        ],
+        "listed_count": 828,
+        "favourites_count": 14060,
+        "verified": false,
+        "description": "Astrofísico, comunicador científico, escéptico, ateo, mala gente en general. Ah, y gay.",
+        "photo": "https://pbs.twimg.com/profile_images/878822938983542784/_aIJ2Xw1.jpg",
+        "created_at": "20090610",
+        "sites" : [
+            ....
+        ],
+        "url": "https://twitter.com/javierarmentia",
+        "cloud": "[mala,gente,general,gay,escéptico,comunicador,científico,ateo,astrofísico]",
+        "channel_provider_id": "46078800",
+        "provider": "twitter",
+        "posts_avg": 9,
+        "followers_count": 17123,
+        "name": "Javier Armentia",
+        "location": "Pamplona",
+        "klout_score": 67,
+        "geo_enabled": true,
+        "screenname": "javierarmentia",
+        "lang": "es",
+        "posts_count": 28644
+    }
 """
 get_profile_info = Endpoint(
     method = 'GET',
