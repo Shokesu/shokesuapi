@@ -95,7 +95,7 @@ class Entity:
         :param data: Son los datos de la entidad en forma de diccionario, que deben ser procesados.
 
         '''
-        fields = [(name, value) for name, value in self.__class__.__dict__.items() if isinstance(value, Field)]
+        fields = self.get_fields()
         for name, field in fields:
             try:
                 selector = DataSelector(field.get_selector()) if not field.get_selector() is None else \
@@ -124,6 +124,10 @@ class Entity:
 
             except Exception as exc:
                 raise ValueError('Error loading entity "{}" attribute: {}'.format(name, str(exc)))
+
+    @classmethod
+    def get_fields(cls):
+        return [(name, value) for name, value in cls.__dict__.items() if isinstance(value, Field)]
 
 
     @classmethod
