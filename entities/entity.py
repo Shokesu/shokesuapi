@@ -43,6 +43,13 @@ class Field:
     def get_selector(self):
         return self.selector
 
+    def __str__(self):
+        if self.is_mandatory():
+            return 'Required field, selector = "{}"'.format(self.get_selector())
+        return 'Field, selector = "{}", default = "{}"'.format(self.get_selector(), self.get_default())
+
+    def __repr__(self):
+        return '\'{}\''.format(str(self))
 
 class RequiredField(Field):
     '''
