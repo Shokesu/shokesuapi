@@ -288,14 +288,39 @@ It follows the next format: <b>yyyy-mm-ddThh:mm+0000</b>
 HTTP/1.1 200 OK
     [
         {
-            "post_id" : "...",
-            "provider" : "...",
-            "body" : {
-                "es" : "@FooBar Hello World!"
+            "mongoid": "59bb5d6ad007ff5aaeadfac3",
+            "kind": "retweet",
+            "videos": [],
+            "source": "web",
+            "type": "post",
+            "body": {
+                "en": "RT @CassiniSaturn: The final images from our nearly 20 years in space are arriving. Unprocessed images are available at:… "
             },
-            "url" : "https://www.twitter.com/status/...",
-            "published_at" : "2017-08-31T11:19+0000",
-            ...
+            "pictures": [],
+            "retweet_count": 8298,
+            "url": "https://twitter.com/46078800/status/908555005950439429",
+            "is_retweet": true,
+            "is_reply": false,
+            "post_id": "908555005950439429",
+            "concepts": [
+                "images"
+            ],
+            "provider": "twitter",
+            "entities": [
+                "images"
+            ],
+            "original_tags": [
+                "images"
+            ],
+            "favorite_count": 0,
+            "published_at": "2017-09-15T04:56+0000",
+            "lang": "en",
+            "retweet_id": "908469553306275840",
+            "reach_count": 16909,
+            "channel_id": "57a9c989d6a340ee508b45e1",
+            "user" : {
+                ...
+            }
         },
         {
             ...
