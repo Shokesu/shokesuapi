@@ -23,7 +23,6 @@ class Post(Entity):
     original_tags = RequiredField()
     lang = RequiredField()
     kind = RequiredField()
-    channel_id = RequiredField()
 
     favorite_count = RequiredField()
     reach_count = RequiredField()
