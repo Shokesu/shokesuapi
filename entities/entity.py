@@ -10,6 +10,7 @@ datos a partir de las respuestas a las requests HTTP realizadas.
 from datetime import datetime
 from re import match
 import json
+from datetime import datetime
 
 class Field:
     '''
@@ -66,12 +67,25 @@ class DateField(Field):
     def __init__(self, selector = None, mandatory = False, default = None):
         super().__init__(selector, self.process_date, mandatory, default)
 
-    @staticmethod
-    def process_date(date):
-        result = match('^(\d{4})\-(\d{1,2})\-(\d{1,2})T(\d{1,2})\:(\d{1,2})\+.*$', date)
-        if not result:
-            raise Exception()
-        timestamp = datetime(*[int(strnum) for strnum in result.groups()])
+    @classmethod
+    def process_date(cls, date):
+        processors = [cls.process_date1, cls.process_date2]
+        for processor in processors:
+            try:
+                timestamp = processor(date)
+                return timestamp
+            except:
+                pass
+        raise Exception()
+
+    @classmethod
+    def process_date1(cls, date):
+        timestamp = datetime.strptime(date, '%Y-%m-%dT%H:%M%z')
+        return timestamp
+
+    @classmethod
+    def process_date2(cls, date):
+        timestamp = datetime.strptime(date, '%b %d, %Y %I:%M:%S %p')
         return timestamp
 
 class DataSelector:
