@@ -7,6 +7,7 @@ import endpoints
 from resourcemapper import ResourceMapper
 from request import request
 from entities.post import Post
+from entities.proyect import Proyect
 
 class API:
     '''
@@ -68,15 +69,18 @@ class API:
                      payload = profile)
         # TODO
 
+
     def get_proyect_info(self, site):
         '''
         Obtiene información de un proyecto.
         :param site: Es el proyecto del que se quiere obtener información
         :return:
         '''
-        self.request(endpoints.get_proyect_info,
-                     placeholders = {'site' : site},
-                     use_access_token = True)
+        data = self.request(endpoints.get_proyect_info,
+                            placeholders = {'site' : site},
+                            use_access_token = True)
+        proyect = Proyect(data)
+        return proyect
 
 
     def get_profile_info(self, profile):
