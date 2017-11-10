@@ -102,8 +102,7 @@ class Entity:
         :param data: Son los datos de la entidad en forma de diccionario, que deben ser procesados.
 
         '''
-        fields = self.get_fields()
-        for name, field in fields:
+        for name, field in self.get_fields().items():
             try:
                 selector = DataSelector(field.get_selector()) if not field.get_selector() is None else \
                     DataSelector(name)
@@ -134,7 +133,7 @@ class Entity:
 
     @classmethod
     def get_fields(cls):
-        return [(name, value) for name, value in cls.__dict__.items() if isinstance(value, Field)]
+        return dict([(name, value) for name, value in cls.__dict__.items() if isinstance(value, Field)])
 
 
     @classmethod
