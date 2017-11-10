@@ -7,18 +7,20 @@ Este módulo se encarga de gestionar las requests a la API de Shokesu
 import requests, json
 from re import match, search, DOTALL
 from logger import Logger
+from urllib.parse import urlencode
 
 # URI raíz de la API de Shokesu
 # api_uri_root = 'https://api.shokesu.com'
 api_uri_root = 'https://app.shokesu.com:8443/shokesu'
 
 
-def request(method, path, access_token = None, payload = None):
+def request(method, path, params = {}, access_token = None, payload = None):
     '''
     Envia una request HTTP a la API de Shokesu.
     :param method: Es el método a utilizar. Deberá ser uno de los siguientes
     GET, PUT, POST, DELETE
     :param path Es la ruta del recurso a obtener, relativa a https://api.shokesu.com
+    :param params Es un diccionario que indicará los parámetros a añadir a la URL.
     :param access_token Es un token JWT que se usará para autenticar al cliente. (Si es None,
     no se añadira a la cabecera)
     :param payload Parámetros a añadir al cuerpo de la request. Por defecto es None. Si no es
@@ -26,10 +28,13 @@ def request(method, path, access_token = None, payload = None):
     se incluirá en el payload.
     :return:
     '''
+
+    params = dict([(key, value) for key, value in params.items() if not value is None])
+
     # Construimos la url
     result = match('^\/?(.*)$', path)
     path = result.group(1)
-    url = '{}/{}'.format(api_uri_root, path)
+    url = '{}/{}?{}'.format(api_uri_root, path, urlencode(params))
 
     send_request = {
         'GET' : requests.get,

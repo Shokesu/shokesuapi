@@ -54,7 +54,7 @@ class API:
         self.request(endpoints.add_terms_to_proyect,
                      placeholders = {'site' : site},
                      use_access_token = True,
-                     params = terms)
+                     payload = terms)
 
 
     def add_profile_to_proyect(self, site, profile):
@@ -65,7 +65,7 @@ class API:
         self.request(endpoints.add_profile_to_proyect,
                      placeholders = {'site' : site},
                      use_access_token = True,
-                     params = profile)
+                     payload = profile)
         # TODO
 
     def get_proyect_info(self, site):
@@ -89,14 +89,21 @@ class API:
                      use_access_token = True)
 
 
-    def get_profile_posts(self, profile, site = None):
+    def get_profile_posts(self, profile, site = None, page_number = 1, page_size = 10, sort = None):
         '''
         Obtiene los posts asociados a un perfil.
         :param profile Es el perfil cuyos posts queremos obtener
         :param site Indica si queremos obtener solo los posts del perfil que
         son contribuciones a un proyecto en conreto. Si es None devuelve todos los
         posts del perfil (Por defecto es None)
-        :return:
+        :param page_number Puede usarse para páginar los posts. Indicará que página de los posts
+        queremos seleccionar. Por defecto se selecciona la primera página.
+        :param page_size Indica el tamaño de la página. Se devolverán a los sumo tantos posts como
+        el tamaño de la página.
+        :param sort Indica el tipo de ordenación de los posts.
+        Los posibles valores son: published_at, retweets_asc, retweets_desc, likes_asc, likes_desc
+        Si no se especifica o se establece a None, el resultado no se ordena (Por defecto es None)
+        :return: Devuelve un listado de Posts extraídos.
         '''
         if not site is None:
             endpoint = endpoints.get_profile_posts_on_proyect
@@ -107,6 +114,9 @@ class API:
 
         data = self.request(endpoint = endpoint,
                             placeholders = placeholders,
+                            params = {'pageNumber' : page_number,
+                                      'pageSize' : page_size,
+                                      'sort' : sort},
                             use_access_token = True)
         return Post.get_from_data(data)
 
@@ -120,7 +130,7 @@ class API:
         self.request(endpoints.get_profiles,
                      placeholders = {'site' : site},
                      use_access_token = True,
-                     params = params)
+                     payload = params)
 
 
 
@@ -147,11 +157,12 @@ class API:
         raise Exception('Uninplemented method')
 
 
-    def request(self, endpoint, placeholders = {}, use_access_token = True, params = None):
+    def request(self, endpoint, placeholders = {}, params = {}, use_access_token = True, payload = None):
         method = endpoint.method
         path = endpoint.path(**self.resource_mapper.map_resources(**placeholders))
         response = request(method = method,
                            path = path,
+                           params = params,
                            access_token = self.access_token if use_access_token else None,
-                           payload = params)
+                           payload = payload)
         return response
