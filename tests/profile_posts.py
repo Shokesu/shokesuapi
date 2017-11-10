@@ -15,7 +15,7 @@ if __name__ == '__main__':
     Logger().setLevel(logging.DEBUG)
 
     # Creamos el objeto API. Necesitamos el JWT para tener acceso.
-    api = API(access_token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiAiMTJmMzNlODJjNWE1NGZiZmE2MmYxZDJkZmQ5YzBkNmIifQ.B1pmP0j4jp33MA4uwBZUkpL6JnRjamTT3RQjgbHiUeA')
+    api = API(access_token = '{your access token here}')
 
     posts = api.get_profile_posts(
         profile = '46078800', # ID del perfil del cual queremos obtener sus posts
