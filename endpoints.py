@@ -92,13 +92,64 @@ add_profile_to_proyect = Endpoint(
 
 
 """
-@api {get} /site/:site_id Get proyect info
+@api {get} /site/<site_id> Get proyect info
 @apiName GetProyectInfo
 @apiDescription Retrieve avaliable proyect information
 @apiGroup Proyects
 @apiParam {String} site_id Unique ID that identifies the proyect
-@apiHeader {String} Authorization This should be "Bearer JWT", where JWT is a js web token. 
+@apiHeader {String} Authorization This should be "Bearer JWT", where JWT is a js web token.
+
+@apiSuccess {String} id Unique ID that identifies the proyect
+@apiSuccess {Object} profiles_aggr This will contain information obtained from the aggregation
+of all profiles in the proyect.
+@apiSuccess {Object} shkAccountId
+@apiSuccess {Date} created Creation date of the proyect with the same format as updatedby
+@apiSuccess {String} createdby Unique ID that identifies the user who created the proyect
+@apiSuccess {Date} updated Last update date of the proyect with this format: <b>M dd, YY hh:mm:ss AM/PM</b>
+@apiSuccess {String} updatedby Unique ID that identifies the user that made the last update to the proyect
+
+
+@apiSuccess {Boolean} isactive Indicates whatever the proyect is still active or not
+@apiSuccess {String} description Textual description of the proyect
+@apiSuccess {String} title Title of the proyect
+@apiSuccess {Object} dashboards Contains information of dashboards added to the proyect.
+@apiSuccess {Object} permissions Indicates the access permissions of the user associated with the
+access_token (added to the header of the request) to the proyect.
+@apiSuccess {Object} terms Each entry on this object will contain information about a term added
+previously to the proyect.
+@apiSuccess {Integer} position
+@apiSuccessExample {json} Success-Response
+HTTP/1.1 200 OK
+    {
+        "id" : "....",
+        "profiles_aggr" : {
+            ...
+        },
+        "created" : "Dec 18, 2016 10:28:18 AM",
+        "createdby" : "...",
+        "updated" : "Dec 21, 2016 12:14:00 AM",
+        "updatedby" : "...",
+        "isactive" : true,
+        "title" : "Manuel Bartual"
+        "description" : "Proyecto para monotorizar los mensajes de Manuel Bartual",
+        
+        "dashboards" : {
+            ...
+        },
+        "terms" : {
+            ...
+        },
+        "permissions" : {
+            "read" : true,
+            "edit" : true,
+            "share" : true,
+            "delete" : false
+        },
+        "position" : 1
+        
+    }
 """
+
 get_proyect_info = Endpoint(
     method = 'GET',
     path = '/site/$1',
