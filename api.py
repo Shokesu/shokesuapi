@@ -8,6 +8,7 @@ from resourcemapper import ResourceMapper
 from request import request
 from entities.post import Post
 from entities.proyect import Proyect
+from entities.profile import Profile
 
 class API:
     '''
@@ -79,7 +80,7 @@ class API:
         data = self.request(endpoints.get_proyect_info,
                             placeholders = {'site' : site},
                             use_access_token = True)
-        proyect = Proyect(data)
+        proyect = Proyect.get_from_data(data)
         return proyect
 
 
@@ -91,7 +92,9 @@ class API:
         data = self.request(endpoints.get_profile_info,
                             placeholders = {'profile' : profile},
                             use_access_token = True)
-        return data
+
+        profile = Profile.get_from_data(data)
+        return profile
 
 
     def get_profile_posts(self, profile, site = None, page_number = 1, page_size = 10, sort = None):
