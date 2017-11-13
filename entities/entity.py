@@ -189,3 +189,7 @@ class Entity:
         :return:
         '''
         return json.dumps(self.to_dict())
+
+
+    def __str__(self):
+        return str(self.to_dict())
