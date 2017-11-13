@@ -130,17 +130,17 @@ class API:
 
 
 
-    def get_profiles(self, site, params):
+    def get_profiles(self, site):
         '''
         Obtiene todos los perfiles dentro de un proyecto.
         :return:
         '''
-        self.request(endpoints.get_profiles,
-                     placeholders = {'site' : site},
-                     use_access_token = True,
-                     payload = params)
-
-
+        data = self.request(endpoints.get_profiles,
+                            placeholders = {'site' : site},
+                            use_access_token = True,
+                            payload = {})
+        profiles = Profile.get_from_data(data)
+        return profiles
 
     def get_graphs(self, site, dashboard):
         '''
