@@ -356,12 +356,17 @@ get_profile_posts_on_proyect = Endpoint(
 
 
 """
-@api {get} /site/:site_id/getprofiles Get profiles
+@api {get} /site/<site_id>/getprofiles Get profiles on proyect
 @apiName GetProfiles
 @apiDescription Get profiles list added to a proyect
+The response's body is a json object list which contains one entry per profile.
+Each entry includes the same data as returned by the <a href="#api-Profiles-GetProfileInfo">GetProfileInfo request</a>
+
 @apiGroup Profiles
-@apiParam {Number} site_id Unique ID that identifies the proyect
 @apiHeader {String} Authorization This should be "Bearer JWT", where JWT is a js web token. 
+
+@apiParam {Number} site_id Unique ID that identifies the proyect (<b>This parameter must be included in the URL of the request</b>)
+
 """
 get_profiles = Endpoint(
     method = 'POST',
