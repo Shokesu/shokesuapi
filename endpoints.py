@@ -354,6 +354,15 @@ get_profile_posts_on_proyect = Endpoint(
 )
 
 
+"""
+TODO
+"""
+get_proyect_posts = Endpoint(
+    method = 'POST',
+    path = '/site/$1/posts',
+    placeholders = ['site']
+)
+
 
 """
 @api {get} /site/<site_id>/getprofiles Get profiles on proyect

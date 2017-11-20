@@ -129,6 +129,29 @@ class API:
         return Post.get_from_data(data)
 
 
+    def get_proyect_posts(self, site, page_number = 1, page_size = 10, sort = None):
+        '''
+        Obtiene posts de un proyecto en concreto.
+        :param site: Es la ID del proyecto del que quiere obtenerse sus perfiles.
+        :param page_number Puede usarse para páginar los posts. Indicará que página de los posts
+        queremos seleccionar. Por defecto se selecciona la primera página.
+        :param page_size Indica el tamaño de la página. Se devolverán a los sumo tantos posts como
+        el tamaño de la página.
+        :param sort Indica el tipo de ordenación de los posts.
+        Los posibles valores son: published_at, retweets_asc, retweets_desc, likes_asc, likes_desc
+        Si no se especifica o se establece a None, el resultado no se ordena (Por defecto es None)
+        :return: Devuelve un listado de Posts extraídos.
+        '''
+        data = self.request(endpoint = endpoints.get_proyect_posts,
+                            placeholders = {'site' : site},
+                            params={'pageNumber': page_number,
+                                    'pageSize': page_size,
+                                    'sort': sort},
+                            use_access_token = True)
+
+        return Post.get_from_data(data)
+
+
 
     def get_profiles(self, site):
         '''
