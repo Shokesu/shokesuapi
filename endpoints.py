@@ -1,3 +1,4 @@
+# coding=utf-8
 
 '''
 Este script define los endpoints de la API de shokesu (métodos y rutas)
