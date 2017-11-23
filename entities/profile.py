@@ -1,4 +1,4 @@
-
+# coding=utf-8
 
 from entities.entity import Entity, RequiredField, Field, DateField
 
