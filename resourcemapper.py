@@ -1,3 +1,4 @@
+# coding=utf-8
 
 '''
 Este script se encarga de convertir nombres de algunos recursos en IDs.
