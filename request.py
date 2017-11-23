@@ -1,4 +1,4 @@
-
+# coding=utf-8
 
 '''
 Este módulo se encarga de gestionar las requests a la API de Shokesu
@@ -7,7 +7,12 @@ Este módulo se encarga de gestionar las requests a la API de Shokesu
 import requests, json
 from re import match, search, DOTALL
 from logger import Logger
-from urllib.parse import urlencode
+
+try:
+    from urllib.parse import urlparse, urlencode
+except ImportError:
+     from urlparse import urlparse
+     from urllib import urlencode
 
 # URI raíz de la API de Shokesu
 # api_uri_root = 'https://api.shokesu.com'
@@ -73,10 +78,16 @@ def request(method, path, params = {}, access_token = None, payload = None):
 
     except Exception as e:
         raise Exception('Error executing request to {}: {}'.format(response.url, str(e)))
+
+    logger.debug('Response body: ')
+    logger.debug(response.text)
+    logger.debug('-------------\n')
+
+    return response
+
+    '''
     try:
-        logger.debug('Response body: ')
-        logger.debug(response.text)
-        logger.debug('-------------\n')
         return response.json()
     except:
         raise Exception('Error parsing request response from {} to JSON'.format(response.url))
+    '''
