@@ -1,4 +1,4 @@
-
+# coding=utf-8
 from entities.entity import Entity, Field, RequiredField, DateField
 
 class Post(Entity):
@@ -9,25 +9,26 @@ class Post(Entity):
     def __init__(self, data):
         super().__init__(data)
 
-
     # Definición de los campos de la entidad Post
     id = RequiredField(selector = 'post_id')
-    videos = RequiredField()
-    source = RequiredField()
-    body = RequiredField(processor = lambda X:next(iter(X.values())))
-    pictures = RequiredField()
+    published_at = DateField(mandatory = True)
     url = RequiredField()
-    concepts = RequiredField()
     provider = RequiredField()
-    entities = RequiredField()
-    original_tags = RequiredField()
+    name = RequiredField(selector = 'user.name')
+    body = RequiredField(processor = lambda X:next(iter(X.values())))
+
     lang = RequiredField()
     kind = RequiredField()
+    tipo = RequiredField(selector = 'type')
+
+    pictures = RequiredField()
+    videos = RequiredField()
+    #concepts = RequiredField()
+    #entities = RequiredField()
+    #original_tags = RequiredField()
 
     favorite_count = RequiredField()
     reach_count = RequiredField()
-
-    published_at = DateField(mandatory = True)
 
     # Campos para posts de twitter
     is_retweet = Field()
