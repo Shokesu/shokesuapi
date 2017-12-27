@@ -56,6 +56,8 @@ def request(method, path, params = {}, access_token = None, payload = None):
     logger.debug('Sending {} request to {}'.format(method, url))
     logger.debug('Headers: ')
     logger.debug('\n'.join(['{}: {}'.format(key, value) for key, value in headers.items()]))
+    logger.debug('Payload: ')
+    logger.debug(payload)
 
     response = send_request[method](url = url, data = payload, headers = headers)
     logger.debug('Response status code: {}'.format(response.status_code))
