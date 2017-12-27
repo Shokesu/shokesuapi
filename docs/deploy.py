@@ -1,7 +1,12 @@
 
 '''
 Script de utilidad para desplegar los ficheros estáticos generados por apidoc en
-un servidor.
+un servidor Flask.
+La aplicación Flask en el servidor debe iniciarse con el script server.py en este mismo
+directorio.
+Una vez hecho esto, debe ejecutarse este script indicando la variable DEPLOY_SERVER_URI
+apuntando a la dirección del servidor. Esto transferirá los ficheros necesarios en el
+directorio apidocs/ al servidor haciendo una petición POST
 '''
 
 from logger import Logger
