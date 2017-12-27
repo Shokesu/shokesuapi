@@ -84,10 +84,17 @@ add_terms_to_proyect = Endpoint(
     placeholders = ['site']
 )
 
-
+"""
+@api {get} /site/:site_id/profiles Add profile to a proyect
+@apiName AddProfileToProyect
+@apiDescription Add some profile to an existing proyect
+@apiGroup Proyects
+@apiParam {String} site_id Unique ID that identifies the proyect
+@apiHeader {String} Authorization This should be "Bearer JWT", where JWT is a js web token. 
+"""
 add_profile_to_proyect = Endpoint(
     method = 'POST',
-    path = '/site/$1/getprofiles',
+    path = '/site/$1/profiles',
     placeholders = ['site']
 )
 
