@@ -344,7 +344,7 @@ get_profile_posts = Endpoint(
 """
 @api {post} /profile/<profile_id>/site/<site_id>/posts Get profile posts on proyect
 @apiName GetProfilePostsOnProyect
-@apiDescription Get posts published by a monitorized profile in a proyect.
+@apiDescription Get posts published by a specific monitorized profile in a proyect.
 To check all the parameters and fields in the response, check this <a href="#api-Profiles-GetProfilePosts">request</a>, which is
 practically the same thing; The only difference is that this request add the parameter 
 "site_id" to the URL.
@@ -363,7 +363,14 @@ get_profile_posts_on_proyect = Endpoint(
 
 
 """
-TODO
+@api {post} /site/<site_id>/posts Get posts on proyect
+@apiName GetProyectPosts
+@apiDescription Get all posts published by any profile in a proyect.
+To check all the parameters and fields in the response, check this <a href="#api-Profiles-GetProfilePosts">request</a>, which is
+practically the same thing; The only difference is that this request add the parameter "site_id" to the URL
+@apiGroup Profiles
+@apiHeader {String} Authorization This should be "Bearer JWT", where JWT is a js web token.
+@apiParam {String} site_id Unique ID that identifies the proyect (It should be passed <b>in the URL</b>)
 """
 get_proyect_posts = Endpoint(
     method = 'POST',
@@ -391,18 +398,27 @@ get_profiles = Endpoint(
     placeholders = ['site']
 )
 
+"""
+TODO
+"""
 get_graphs = Endpoint(
     method = 'POST',
     path = '/site/$1/dashboard/$2',
     placeholders = ['site', 'dashboard']
 )
 
+"""
+TODO
+"""
 get_reports = Endpoint(
     method = 'GET',
     path = '/site/$1/report/$2',
     placeholders = ['site', 'report']
 )
 
+"""
+TODO
+"""
 get_insights = Endpoint(
     method = 'POST',
     path = '/profile/$1/pdfReport',
