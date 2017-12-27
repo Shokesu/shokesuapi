@@ -1,3 +1,4 @@
+# coding=utf-8
 
 '''
 Script principal. Permite interactúar con la API de Shokesu.
@@ -214,4 +215,10 @@ class API:
                            params = params,
                            access_token = self.access_token if use_access_token else None,
                            payload = payload)
-        return response
+
+        self.response = response
+
+        try:
+            return response.json()
+        except:
+            raise Exception('Error parsing request response from {} to JSON'.format(response.url))

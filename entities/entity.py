@@ -1,4 +1,4 @@
-
+# coding=utf-8
 
 '''
 Este script define la clase base para definir entidades (devueltas en las requests de la API de
@@ -57,7 +57,7 @@ class RequiredField(Field):
     Representa un campo de una entidad que es obligatorio.
     '''
     def __init__(self, selector = None, processor = None):
-        super().__init__(selector, processor, mandatory = True)
+        Field.__init__(self, selector, processor, mandatory = True)
 
 
 class DateField(Field):
@@ -65,7 +65,7 @@ class DateField(Field):
     Representa un campo de una entidad que es una fecha.
     '''
     def __init__(self, selector = None, mandatory = False, default = None):
-        super().__init__(selector, self.process_date, mandatory, default)
+        Field.__init__(self, selector, self.process_date, mandatory, default)
 
     @classmethod
     def process_date(cls, date):
