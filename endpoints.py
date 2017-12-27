@@ -67,7 +67,7 @@ delete_user = Endpoint(
 )
 
 """
-@api {get} /site/:site_id/terms Add terms to a proyect
+@api {get} /site/<site_id>/terms Add terms to a proyect
 @apiName AddTermsToProyect
 @apiDescription Add some terms to a existing proyect
 @apiGroup Proyects
@@ -85,7 +85,7 @@ add_terms_to_proyect = Endpoint(
 )
 
 """
-@api {get} /site/:site_id/profiles Add profile to a proyect
+@api {get} /site/<site_id>/profiles Add profile to a proyect
 @apiName AddProfileToProyect
 @apiDescription Add some profile to an existing proyect
 @apiGroup Proyects
@@ -352,7 +352,6 @@ practically the same thing; The only difference is that this request add the par
 @apiHeader {String} Authorization This should be "Bearer JWT", where JWT is a js web token. 
 @apiParam {String} profile_id Unique ID that identifies the profile
 @apiParam {String} site_id Unique ID that identifies the proyect (It should be passed <b>in the URL</b>)
-@apiParam {String} profile_id It should be replaced <b>in the URL</b> with the unique ID of the profile
 
 """
 get_profile_posts_on_proyect = Endpoint(
