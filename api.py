@@ -35,7 +35,7 @@ class API:
         "password", "country", "email", "company", "repeat_password"
         :return:
         '''
-        raise Exception('Uninmplemented method')
+        raise NotImplementedError()
         # TODO
 
     def delete_user(self, user):
@@ -45,7 +45,7 @@ class API:
         :return:
         '''
         # TODO
-        raise Exception('Uninmplemented method')
+        raise NotImplementedError()
 
     def add_terms_to_proyect(self, site, terms):
         '''
@@ -190,7 +190,7 @@ class API:
         :return:
         '''
         # TODO
-        raise Exception('Uninplemented method')
+        raise NotImplementedError()
 
     def get_reports(self, site, report):
         '''
@@ -199,12 +199,13 @@ class API:
         :return:
         '''
         # TODO
-        raise Exception('Uninplemented method')
+        raise NotImplementedError()
 
 
     def get_insights(self):
         # TODO
-        raise Exception('Uninplemented method')
+        raise NotImplementedError()
+
 
 
     def request(self, endpoint, placeholders = {}, params = {}, use_access_token = True, payload = None):
